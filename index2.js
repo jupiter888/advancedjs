@@ -45,7 +45,7 @@ http.createServer(function(req,res){
         var msg="not found";
       };
       res.writeHead(200, {'Content-Type': 'text/html'});
-      res.end('Searched for ' + params.title + "<br>" + msg ); 
+      res.end('Search for ' + params.title + "<br>" + msg ); 
       break;
       
     case '/add':
