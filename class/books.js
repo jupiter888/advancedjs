@@ -1,3 +1,4 @@
+//_____________________________HOMEWORK2____________________________
 "use strict";
 let books=[
     {title: "it", author:"frankenstein sherbet",pubdate:1986},
@@ -37,14 +38,13 @@ exports.add=(newTitle, newAuthor, newPubdate)=>{
 
 
 
-
+//notes//////////////////////////////////////////////////////////////////////////////////
 
 //pass in param , title, using arrow syntax to define that function
 //function  
 //function get, against title, has a string and finds against the titles 
 //whats happens here is another method,find, executes using another function(anonymous)
 //the inner one returns a value and gets returned to the function that calls it 
-
 //use this for exporting
 // let get= (title) => {
 //     return books.find((item) =>{
@@ -52,10 +52,3 @@ exports.add=(newTitle, newAuthor, newPubdate)=>{
 //         return item.title == title;
 //     });
 // }
-
-//doesnt have something called test, so this will show an error
-//this is a test portion of this code
-//returns undefined at end of the info being requested in previous code
-//console.log(get("test"));
-
-//this module is going to have an export attr

@@ -1,4 +1,4 @@
-
+//HOMEWORK 2 also uses the books.js module located in: ./class/books.js
 var http=require("http"), fs = require ('fs'), qs = require("querystring"), books=require("./class/books")
 
 
