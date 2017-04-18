@@ -2,6 +2,8 @@
 var http=require("http"), fs = require ('fs'), qs = require("querystring"), books=require("./class/books")
 
 
+
+//this fn helps when using http
 function serveStatic(res, path, contentType, responseCode){
   if(!responseCode) responseCode = 200;
   fs.readFile(__dirname + path, function(err, data){
@@ -25,32 +27,47 @@ http.createServer(function(req,res){
   //returns array with two items in it
   //["/search","title=dune"]
   //    0           1
+  //  example   /search?title=it
   var params = qs.parse(url[1]);
-  console.log(params)
-  var path = url[0].toLowerCase();
-  switch(path) {
+  var way = url[0].toLowerCase();
+  switch(way) {
     
-    case 'http://localhost:3000': 
-      res.writeHead(200, {'Content-Type': 'text/html'});
-      res.end('/public/home.html');
+    case '/': 
+      serveStatic(res,'/public/home.html','text/html');
+      break;
+    case'/about':
+      serveStatic(res,'/public/about.html','text/html');
       break;
     case '/search':
-      console.log(books.get(params.title))
+      var result = books.get(params.title);
+      if (result){
+        var msg = "Title: "+ result.title +'<BR>'+ ' Author: ' + result.author +'<BR>'+ ' Publish Date: ' + result.pubdate;
+      }else{
+        var msg="not found";
+      };
       res.writeHead(200, {'Content-Type': 'text/html'});
-      res.end('search for' + params.title);
+      res.end('Searched for ' + params.title + "<br>" + msg ); 
       break;
-    case '/add': 
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('add');
+    case '/add':
+      var result = books.add(params.title, params.author, params.pubdate);
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end(result);
       break;
       
+    case '/delete': 
+      var result = books.delete(params.title);
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end(result);
+      break;
+      
+
     default:
       res.writeHead(404, {'Content-Type': 'text/plain'});
       res.end('404:Page not found.');
   }
   
 }).listen(process.env.PORT || 3000, function(){
-  console.log('server up')
+  console.log('server up on');
 });
 //steps 
 //define module called books

@@ -6,8 +6,39 @@ let books=[
     {title: "tao ti ching", author:"Lao Tzu",pubdate:1488}
     ];
 
-//will return tao ti ching
-console.log(books[2]);
+exports.get = (title) => {
+    return books.find((item) =>{
+        return item.title == title;
+    });
+} 
+
+exports.delete=(title)=>{
+        var index= books.findIndex(function(element){
+            return element.title.toLowerCase()==title;
+            
+        });
+        if(index===-1){
+            var msg2="Does not exist";
+            return msg2;
+        }else{
+        var removed= books.splice(index,1);
+         console.dir(removed);
+        return removed[0].title + " has been removed, " + "<br>" + books.length + " books remaining";
+        }
+        
+}
+
+exports.add=(newTitle, newAuthor, newPubdate)=>{
+        var newBook={title:newTitle.toLowerCase(), author:newAuthor, pubdate:parseInt(newPubdate)};
+        books.push(newBook);
+        return newBook.title + " has been added to the library" +"<br>"+ books.length + " books in library now";
+};
+
+
+
+
+
+
 
 //pass in param , title, using arrow syntax to define that function
 //function  
@@ -29,8 +60,3 @@ console.log(books[2]);
 //console.log(get("test"));
 
 //this module is going to have an export attr
-exports.get = (title) => {
-    return books.find((item) =>{
-        return item.title == title;
-    });
-} 

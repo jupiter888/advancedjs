@@ -18,7 +18,7 @@ var fs = require('fs');
 http.createServer(function(req,res){
   var path = req.url.toLowerCase();
   switch(path) {
-    case 'http://localhost:3000': 
+    case '/': 
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end('/public/home.html');
       break;
@@ -34,3 +34,5 @@ http.createServer(function(req,res){
 }).listen(process.env.PORT || 3000, function(){
   console.log('server up')
 });
+
+//node -v to see the node version being run
