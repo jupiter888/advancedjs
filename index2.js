@@ -19,9 +19,6 @@ function serveStatic(res, path, contentType, responseCode){
 }
 
 http.createServer(function(req,res){
-  //query params
-  //this below is the full url requested
-  //     /search?title=dune
   //splits on question mark
   var url = req.url.split("?")
   //returns array with two items in it
@@ -31,14 +28,16 @@ http.createServer(function(req,res){
   var params = qs.parse(url[1]);
   var way = url[0].toLowerCase();
   switch(way) {
-    
     case '/': 
       serveStatic(res,'/public/home.html','text/html');
       break;
+      
     case'/about':
       serveStatic(res,'/public/about.html','text/html');
       break;
+      
     case '/search':
+      //receive info from books module
       var result = books.get(params.title);
       if (result){
         var msg = "Title: "+ result.title +'<BR>'+ ' Author: ' + result.author +'<BR>'+ ' Publish Date: ' + result.pubdate;
@@ -48,26 +47,34 @@ http.createServer(function(req,res){
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end('Searched for ' + params.title + "<br>" + msg ); 
       break;
+      
     case '/add':
+      //receive info from books module
       var result = books.add(params.title, params.author, params.pubdate);
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end(result);
       break;
       
     case '/delete': 
+      //receive info from books module
       var result = books.delete(params.title);
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end(result);
       break;
       
-
     default:
       res.writeHead(404, {'Content-Type': 'text/plain'});
       res.end('404:Page not found.');
   }
   
 }).listen(process.env.PORT || 3000, function(){
-  console.log('server up on');
+  console.log('server up');
 });
-//steps 
+//steps i took
 //define module called books
+//define functions for get, delete, add items from array
+//each of those functions communcating with the index2.js module
+//installed querystring
+//used writehead to print on line 46
+//serveStatic made most of this possible, was getting errors before i included this
+//
