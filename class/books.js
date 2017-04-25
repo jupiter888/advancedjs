@@ -1,9 +1,9 @@
 //_____________________________HOMEWORK2____________________________
 "use strict";
 let books=[
-    {title: "it", author:"frankenstein sherbet",pubdate:1986},
-    {title: "moby dick", author:"albert hoffman",pubdate:1977},
-    {title: "tao ti ching", author:"Lao Tzu",pubdate:1488}
+    {title: "Mycelium Running", author:"Paul Stamets",pubdate:2010},
+    {title: "Chemical Romance", author:"Albert Hoffman",pubdate:1977},
+    {title: "Tao Ti Ching", author:"Lao Tzu",pubdate:1488}
     ];
     
 //get function
