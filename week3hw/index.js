@@ -1,5 +1,5 @@
 'use strict';
-let mushrooms= require("./lib/mushrooms.js");
+let mushroom= require("./lib/mushroom.js");
 const express = require("express");
 const app = express();
 
@@ -12,21 +12,21 @@ let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html'}));
 app.set("view engine", ".html");
 
-// send static file as response
+//send static file as response
 app.get('/', function(req,res){
     res.type('text/html');
     res.sendFile(__dirname + '/public/home.html'); 
 });
 
-//send text response
+//send plain text About page response
 app.get('/about', function(req,res){
     res.type('text/plain');
     res.send('About page');
 });
 
-// handle GET 
+// handle (delete) GET 
 app.get('/delete', function(req,res){
-    let result = mushrooms.delete(req.query.type); 
+    let result = mushroom.delete(req.query.type); 
     //missing res.type
     console.log(result.totalremaining); 
     res.render('delete', {type: req.query.type, result: result});
@@ -35,7 +35,7 @@ app.get('/delete', function(req,res){
 // handle POST
 app.post('/get', function(req,res){
     let header='Searching for the medicinal mushroom called ' +req.body.type;
-    let found= mushrooms.get(req.body.title);
+    let found= mushroom.get(req.body.type);
     res.render("details", {type: req.body.type, result: found, pageheader: header} );
 });
 
