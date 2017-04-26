@@ -26,10 +26,11 @@ exports.delete=(type)=>{
     mushrooms=newMushroom;
     return{deleted:mushrooms.length!==oldLength , totalremaining:mushrooms.length};
 };
-exports.add=(newType, newOtherName, newUse, newFrequency, newDosageMg)=>{
-    var newMushroom={type:newType.toLowerCase(), otherName:newOtherName, use:newUse, frequency:newFrequency, dosageMg:parseInt(newDosageMg) };
-    mushrooms.push(newMushroom);
-    return newMushroom.type + " has been added to the mushroom medicine list" +"<br>"+ mushrooms.length + " mushrooms in catalogue now";
-};
+
+// exports.add=(newType, newOtherName, newUse, newFrequency, newDosageMg)=>{
+//     var newMushroom={type:newType.toLowerCase(), otherName:newOtherName, use:newUse, frequency:newFrequency, dosageMg:parseInt(newDosageMg) };
+//     mushrooms.push(newMushroom);
+//     return newMushroom.type + " has been added to the mushroom medicine list" +"<br>"+ mushrooms.length + " mushrooms in catalogue now";
+// };
 
 

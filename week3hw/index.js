@@ -1,5 +1,5 @@
 'use strict';
-let mushroom = require("./lib/mushrooms.js");
+let mushrooms= require("./lib/mushrooms.js");
 const express = require("express");
 const app = express();
 
@@ -26,7 +26,8 @@ app.get('/about', function(req,res){
 
 // handle GET 
 app.get('/delete', function(req,res){
-    let result = mushroom.delete(req.query.type); 
+    let result = mushrooms.delete(req.query.type); 
+    //missing res.type
     console.log(result.totalremaining); 
     res.render('delete', {type: req.query.type, result: result});
 });
@@ -34,21 +35,25 @@ app.get('/delete', function(req,res){
 // handle POST
 app.post('/get', function(req,res){
     let header='Searching for the medicinal mushroom called ' +req.body.type;
-    let found= mushroom.get(req.body.title);
+    let found= mushrooms.get(req.body.title);
     res.render("details", {type: req.body.type, result: found, pageheader: header} );
 });
 
 // define 404 handler
 //later will make this go to a page
 app.use(function(req,res) {
-    res.type('text/plain'); 
+    res.type('text/html'); 
     res.status(404);
-    res.send('404 - Not found');
+    res.sendFile(__dirname + '/public/404.html'); 
 });
 
 app.listen(app.get('port'), function() {
     console.log('Express started');    
 });
+
+   
+
+
 ////////////////////////////////////////////////////////////////////////////////////
 // //defined module called books again
 // //defined functions for get, delete, add items from array
