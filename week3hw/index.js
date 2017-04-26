@@ -26,10 +26,8 @@ app.get('/about', function(req,res){
 
 // handle (delete) GET 
 app.get('/delete', function(req,res){
-    let result = mushroom.delete(req.query.type); 
-    //missing res.type
-    console.log(result.totalremaining); 
-    res.render('delete', {type: req.query.type, result: result});
+    let result = mushroom.delete(req.query.type);
+    res.render('delete' , {type: req.query.type , result: result});
 });
 
 // handle POST
@@ -37,6 +35,12 @@ app.post('/get', function(req,res){
     let header='Searching for the medicinal mushroom called ' +req.body.type;
     let found= mushroom.get(req.body.type);
     res.render("details", {type: req.body.type, result: found, pageheader: header} );
+});
+
+// handle (add) GET 
+app.get('/add', function(req,res){
+    let result = mushroom.add(req.query.type);
+    res.render('add' , {type: req.query.type , result: result});
 });
 
 // define 404 handler
