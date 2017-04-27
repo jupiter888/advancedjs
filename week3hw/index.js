@@ -39,9 +39,15 @@ app.post('/get', function(req,res){
 
 // handle (add) GET 
 app.get('/add', function(req,res){
-    let result = mushroom.add(req.query.type);
+    let result = mushroom.add(req.query.type,req.query.name);
     res.render('add' , {type: req.query.type , result: result});
 });
+//above will not be a get, it will be a post
+//post is teh info sent by a webpage
+//get is retrieving the page and its displayed details
+
+
+//new form needs to have name"" 
 
 // define 404 handler
 //later will make this go to a page
