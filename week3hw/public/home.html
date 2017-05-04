@@ -1,79 +1,63 @@
 <html>
+	<head>
+		<title>HOME</title>
+	</head>
 <body>
 <h1>Home</h1>
 <p>Search below for a medicinal mushroom</p><br>
 <!--search form-->
 <form method="POST" action="/get">
-    <input type="text" name="type" placeholder="search mushroom name" required maxlength="100">
+    <input type="text" name="find type" placeholder="search mushroom name" required maxlength="100">
     <button>Search</button>
+</form>
+<br>
+<!--is my action on below line supposed to be /addmush?-->
+<form method="POST"  action="addMush" name="add_mushroom">
+	<legend><b>Add new Mushroom</b></legend>
+	<label>Mushroom type</label>
+	<input id="mushtype" name="mush_type" placeholder="enter mushroom type" type="text"/>
+	<br>
+	<label>Mushroom Latin name</label>
+	<input id="mushothname" name="mush_other_name" placeholder="enter Latin name" type="text"/>
+	<br>
+	<label>Mushroom Uses</label>
+	<input id="mushuse" name="mush_use" placeholder="enter uses" type="text"/>
+	<br>
+	<label>Frequency</label>
+	<input id="mushfreq" name="mush_freq" placeholder="enter dose frequency" type="text"/>
+	<br>
+	<label>Mushroom Dosage</label>
+	<input id="mushdose" name="mush_dose" placeholder="enter miligrams dosage" type="text"/>
+	<br>
+	<input type="submit" value="Add New Mushroom"/>
 </form>
 
 
-<!--example form for add
-https://codeshare.io/5g8rEn
-
-snapshot of the project and how to handle the add
-https://github.com/sophiallen/itc298/tree/a91a3cd3ad22e9e6c7c709c870a05fe347c8aeab
--->
-
-<!--<form name="find_language" action="search" method="post">-->
-<!--	<legend>Find Language Details</legend>-->
-<!--	<input id="search_term" type="text" name="search_term"/>-->
-<!--	<input id="searchBtn" type="submit" value="search"/>-->
-<!--</form>-->
-<!--<form name="add_language" action="addLang" method="post">-->
-<!--	<legend>Add new language</legend>-->
-<!--	<label>Languge Name</label>-->
-<!--	<input id="lang_name" name="lang_name" type="text"/>-->
-<!--	<label>Language Engine</label>-->
-<!--	<input id="engine" name="engine" type="text"/>-->
-<!--	<input type="submit" value="Add New Language"/>-->
-<!--</form>-->
 
 
 
-<!--
-here's what my add route looked like in my index.js
-
-app.post('/addLang', function(req, res){
-	res.type('text/html');
-	var langName = req.body.lang_name;
-	var langEngine = req.body.engine;
-	var success = languageList.addLang(langName, langEngine);
-	var footer = '<a href="/">Return to home page.</a>'
-
-	if (success){
-		req.session.feedback = {'success': true, 'msg': 'successfully added ' + langName + ' to our records.'};
-	} else {
-		req.session.feedback = {'success': false, 'msg': 'Error: unable to add ' + langName + 'to our records. Check to make sure it has not already been added.'};
-	}
-
-	res.redirect('/');
-});
 
 
-here's what my add method looked like in my model: 
+	<!--addMush: function(mushtype, mushothname, mushuse, mushfreq, mushdose){-->
+	<!--	var oldLength = mushrooms.length;-->
+	<!--	var newMush = {'type': type.toLowerCase(), 'engine': engine, 'users': 1};-->
 
-	addLang: function(name, engine){
-		var oldLength = languages.length;
-		var newLang = {'name': name.toLowerCase(), 'engine': engine, 'users': 1};
+	<!--	//check to make sure mushroom isn't on the list already-->
+	<!--	var alreadyExists = mushrooms.find(function(item){-->
+	<!--		return item.type == type;-->
+	<!--	});-->
 
-		//check to make sure language isn't already on the list.
-		var alreadyExists = languages.find(function(item){
-			return item.name == name;
-		});
-
-		//add and check new list length to measure success, else return false 
-		if (!alreadyExists){
-			var newLength = languages.push(newLang);
-			return newLength > oldLength;
-		} else { //language has already been added.
-			return false;
-		}
-	}
+	<!--	//add and check new list length to measure success, else return false -->
+	<!--	if (!alreadyExists){-->
+	<!--		var newLength = mushrooms.push(newMush);-->
+	<!--		return newLength > oldLength;-->
+	<!--	} else { //Mushroom has already been added.-->
+	<!--		return false;-->
+	<!--	}-->
+	<!--}-->
 	
-	once the add form is on the home page, take it out of the details page!!!!
--->
+	<!--once the add form is on the home page, take it out of the details page!!!!-->
+
 
 
 
