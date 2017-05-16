@@ -13,6 +13,8 @@
   "author": "Daniel Tracy",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.2"
+    "body-parser": "^1.15.0",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0"
   }
 }

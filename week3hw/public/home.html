@@ -7,59 +7,30 @@
 <p>Search below for a medicinal mushroom</p><br>
 <!--search form-->
 <form method="POST" action="/get">
-    <input type="text" name="find type" placeholder="search mushroom name" required maxlength="100">
+    <input type="text" name="type" placeholder="search mushroom name" required maxlength="100">
     <button>Search</button>
 </form>
 <br>
 <!--is my action on below line supposed to be /addmush?-->
-<form method="POST"  action="addMush" name="add_mushroom">
+<form method="POST"  action="/add" name="add_mushroom">
 	<legend><b>Add new Mushroom</b></legend>
 	<label>Mushroom type</label>
-	<input id="mushtype" name="mush_type" placeholder="enter mushroom type" type="text"/>
+	<input id="mushtype" type="text" name="type" placeholder="enter mushroom type" />
 	<br>
 	<label>Mushroom Latin name</label>
-	<input id="mushothname" name="mush_other_name" placeholder="enter Latin name" type="text"/>
+	<input id="mushothname" type="text" name="otherName" placeholder="enter Latin name" />
 	<br>
 	<label>Mushroom Uses</label>
-	<input id="mushuse" name="mush_use" placeholder="enter uses" type="text"/>
+	<input id="mushuse" type="text" name="use" placeholder="enter uses" />
 	<br>
 	<label>Frequency</label>
-	<input id="mushfreq" name="mush_freq" placeholder="enter dose frequency" type="text"/>
+	<input id="mushfreq" type="text" name="frequency" placeholder="enter dose frequency" />
 	<br>
 	<label>Mushroom Dosage</label>
-	<input id="mushdose" name="mush_dose" placeholder="enter miligrams dosage" type="text"/>
+	<input id="mushdose" type="text" name="dosageMg" placeholder="enter miligrams dosage" />
 	<br>
 	<input type="submit" value="Add New Mushroom"/>
 </form>
-
-
-
-
-
-
-
-	<!--addMush: function(mushtype, mushothname, mushuse, mushfreq, mushdose){-->
-	<!--	var oldLength = mushrooms.length;-->
-	<!--	var newMush = {'type': type.toLowerCase(), 'engine': engine, 'users': 1};-->
-
-	<!--	//check to make sure mushroom isn't on the list already-->
-	<!--	var alreadyExists = mushrooms.find(function(item){-->
-	<!--		return item.type == type;-->
-	<!--	});-->
-
-	<!--	//add and check new list length to measure success, else return false -->
-	<!--	if (!alreadyExists){-->
-	<!--		var newLength = mushrooms.push(newMush);-->
-	<!--		return newLength > oldLength;-->
-	<!--	} else { //Mushroom has already been added.-->
-	<!--		return false;-->
-	<!--	}-->
-	<!--}-->
-	
-	<!--once the add form is on the home page, take it out of the details page!!!!-->
-
-
-
 
 </body>
 </html>
