@@ -59,5 +59,5 @@ app.listen(app.get('port'), function() {
     console.log('Express started');    
 });
 
-   
 
+Also, your form submits name="find type": <input type="text" name="find type" placeholder="search mushroom name" required maxlength="100"> But your server route expects 'type': let found= mushroom.get(req.body.type); Do you want to fix that, and also make sure your detail page has a 'delete' link>
