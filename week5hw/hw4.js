@@ -4,4 +4,4 @@ var newArray = names.map( function(item) {
  return item.toUpperCase();
  x = 2;
 }) 
-// console.log(newArray);
+// console.log(newArray);  idk what to do to with this

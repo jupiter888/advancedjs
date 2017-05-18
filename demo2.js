@@ -34,7 +34,7 @@ console.log(books[2]);
 //console.log(get("test"));
 
 //this module is going to have an export attr
-// going tohave fx get, server should be able to access this 
+// going to have fx get, server should be able to access this 
 exports.get= (title) => {
     return books.find((item) =>{
         //console.log(item);

@@ -20,3 +20,7 @@ mushroomSchema.methods.getSeasonalStatus =function(){
 };
 var Fungus=mongoose.model('Fungus',mushroomSchema);
 module.exports= Fungus;
+
+//rename as mushroms.
+//create model directory on root
+//put this inside

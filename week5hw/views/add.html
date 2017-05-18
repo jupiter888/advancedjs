@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <a href="/">Home</a>
+{{#if result}}
+    <h2>{{type}} has been added</h2>
+    total remaining mushrooms: {{result.total}}
+{{else}}
+    <h2>{{type}} not added</h2>
+    total mushrooms in catalogue: {{result.total}}
+{{/if}}
+
+    </body>
+</html>
+
+
