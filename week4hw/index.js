@@ -31,6 +31,7 @@ app.get('/delete', function(req,res){
 
 // get
 app.post('/get', function(req,res){
+    let header='Searching for the medicinal mushroom called ' +req.body.type;
     let found= mushroom.get(req.body.type);
     res.render("details", {type: req.body.type, result: found} );
 });

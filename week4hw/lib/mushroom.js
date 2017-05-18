@@ -26,32 +26,25 @@ exports.delete=(type)=>{
     return {deleted:oldLength !== mushrooms.length ,  total: mushrooms.length };
  };
 
-
-
+//add and check new list length to measure success, else return false 
+// exports.add=(newType, newOtherName, newUse, newFrequency, newDosageMg)=>{
+//     var newMushroom={type:newType.toLowerCase(), otherName:newOtherName, use:newUse, frequency:newFrequency, dosageMg:parseInt(newDosageMg) };
+//     {added: mushrooms.push(newMushroom)}
+//     return newMushroom.type + " has been added to the mushroom medicine list" +"<br>"+ mushrooms.length + " mushrooms in catalogue now";
+// };
 
 
 //hw4needs this below
-exports.add=(newMushroom)=>{
-    var mushroomlen= mushrooms.length;
-    var mType=newMushroom.type; 
-    var mON=newMushroom.otherName;
-    var mUse=newMushroom.use;
-    var mFreq=newMushroom.frequency;
-    var mDose= newMushroom.dosageMg;
-    var completeMushroom = { type: mType, otherName: mON, use: mUse , frequency: mFreq, dosageMg: mDose};
-    mushrooms.push(completeMushroom);
-    var added =(mushrooms.length==mushroomlen) ? "" : "added";
-		
-// 	});
-    return {"action": added,  total: mushrooms.length };
-	};
+exports.add = (newMushroom) => {
+    var oldLength= mushrooms.length;
+    if (!this.get(newMushroom.type)) { // if get() returns undefined, add new mushroom
+        mushrooms.push(newMushroom);
+    }
+
+    return {added: oldLength !== mushrooms.length ,  total: mushrooms.length };
+};
 
 	
-
-
-
-
-
 
 
 
