@@ -1,6 +1,6 @@
 <html>
     <body>
-        <a href="/">Home</a> <a href="/about">About</a> <a href="/catalog.html">Catalog list</a>
+        <a href="/">Home</a> <a href="/about">About</a>
 {{#if result}}
     <h2>Searching for {{type}} details</h2>
     <li><em>Type: </em> {{result.type}}</li>
@@ -10,10 +10,12 @@
     <li><em>Dosage Amount (Mg): </em> {{result.dosageMg}}</li>
     <p>
     <a href="/delete?type={{type}}">Delete</a>
-    </p>
-   
+  
+   <!--this is the comment in a template that will not show up-->
 {{else}}
         <h2>{{type}} cannot be found</h2>
+        <!--this is the comment in a template that will not show up-->
+        <!--</p> <a href="/add?type={{type}}">Add</a> -->
           
 {{/if}}
     </body>

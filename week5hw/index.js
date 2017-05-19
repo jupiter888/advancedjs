@@ -47,6 +47,7 @@ app.get('/get', function(req,res){
     res.render("details", {type: req.query.type, result: found} );
 });
 
+//add item to array
 app.post('/add',function(req,res){
     let completeMushroom={type : req.body.type, otherName: req.body.otherName, use: req.body.use, frequency: req.body.frequency, dosageMg:req.body.dosageMg};
     let added= mushroom.add(completeMushroom);
