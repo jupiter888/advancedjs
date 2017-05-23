@@ -15,8 +15,8 @@ app.set("view engine", ".html");
 app.get('/', function(req,res){
     res.type('text/html');
     res.render('home',{items: mushroom.getAll() });
- //his is the constant link to home, we now wan this be dynamic
- //able to 
+ //this is the constant link to home, we now want this to be dynamic
+ //able to change when item is added
 //    res.sendFile(__dirname + '/public/home.html'); 
 });
 
