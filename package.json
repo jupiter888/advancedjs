@@ -22,6 +22,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^3.3.0",
-    "mongoose": "^4.10.2"
+    "mongoose": "^4.10.2",
+    "restler": "^3.4.0"
   }
 }

@@ -1,40 +1,59 @@
-var http = require('http');
-var fs =require('fs');
-// var mongoose= require('mongoose');
+'use strict';
+var fungus = require('./models/mushroom.js');
+var express = require("express");
+var app = express();
+
+//express
+app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/public')); // allows direct navigation to static files
+app.use(require("body-parser").urlencoded( {extended: true} ));
+
+//template engine
+let handlebars =  require("express-handlebars");
+app.engine(".html", handlebars({extname: '.html'}));
+app.set("view engine", ".html");
+
+//adding new items to db
+new fungus({
+        type: 'agaricus blazei',
+        otherName: 'Prince',
+        use: 'anti cancer',
+        frequency: 'daily',
+        dosageMg: '500'
+    }).save();
+    
+    new fungus({
+        type: 'cordycep militaris',
+        otherName: 'korean cordycep',
+        use: 'anti cancer, stamina',
+        frequency: 'daily',
+        dosageMg: '300'
+    }).save();
 
 
-
-// http.createServer(function(req,res){
-//   var path = req.url.toLowerCase();
-//   switch(path) {
-//     case '/': 
-//       res.writeHead(200, {'Content-Type': 'text/html'});
-//       res.end('/public/home.html');
-//       break;
-//     case 'http://localhost:3000/about':
-//       res.writeHead(200, {'Content-Type': 'text/html'});
-//       res.end('/public/about.html');
-//       break;
-//     default:
-//       res.writeHead(404, {'Content-Type': 'text/plain'});
-//       res.end('404:Page not found.');
-//   }
-  
-// }).listen(process.env.PORT || 3000, function(){
-//   console.log('Server is up!');
-// });
-
-//https://scalegrid.io/blog/getting-started-with-mongodb-and-mongoose/
-
-
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://mongo_db_uno');
- 
-var db = mongoose.mongo.development.connectionString();
- 
-db.on('error', function (err) {
-console.log('connection error', err);
+//send static file as response
+app.get('/', function(req,res){
+    res.type('text/html');
+    res.render('home',{items: fungus.getAll() });
+ //this is the constant link to home, we now want this to be dynamic
+ //able to change when item is added
+//    res.sendFile(__dirname + '/public/home.html'); 
 });
-db.once('open', function () {
-console.log('connected.');
+
+//search
+fungus.find(function(err, mushrooms){
+    if(err) return console.error(err);
+    if(mushrooms.length) return;
+});
+
+
+
+// 404 handler
+app.use(function(req,res) {
+    res.type('text/html'); 
+    res.status(404);
+    res.sendFile(__dirname + '/public/404.html'); 
+});
+app.listen(app.get('port'), function() {
+    console.log('Express started');    
 });

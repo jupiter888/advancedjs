@@ -1,0 +1,12 @@
+<h1>Mushrooms</h1>
+{{#each mushrooms}}
+    <div class="mushroom">
+        <h3>{{type}}</h3>
+        <p>{{otherName}}</p>
+    </div>
+{{/each}}
+
+app.get('/mushrooms' function(req, res){
+    fungus.find({type} , {otherName} )
+    
+    //pg 153
