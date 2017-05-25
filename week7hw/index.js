@@ -46,14 +46,14 @@ fungus.find(function(err, mushrooms){
     if(mushrooms.length) return;
 });
 
+
+
 // 404 handler
 app.use(function(req,res) {
     res.type('text/html'); 
     res.status(404);
     res.sendFile(__dirname + '/public/404.html'); 
 });
-
-//confirm server started
 app.listen(app.get('port'), function() {
     console.log('Express started');    
 });
