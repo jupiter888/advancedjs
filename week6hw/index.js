@@ -19,24 +19,28 @@ app.get('/', function(req,res){
     res.render('home',{items: Mushroom.getAll() });
 });
 
-//need delete route
-//need add route
+
+//need add route, get and post
 //search(get all in collection)
 
-/////////////////////////////////////////////////
-// handle /delete
+
+
+//handle /delete
 app.get('/delete', function(req,res){
     let result = Mushroom.delete(req.query.type);
     res.render('delete' , {type: req.query.type , result: result});
 });
 
 //handle /add
-app.post('/add', function(req,res){ 
-    
+app.post('/add', function(req,res){
+    let completeMushroom={type : req.body.type, otherName: req.body.otherName, use: req.body.use, frequency: req.body.frequency, dosageMg:req.body.dosageMg};
+     let added= Mushroom.add(completeMushroom);
+    res.render('add', {type: req.body.type, result:added});
 });
 
 app.get('/add',function(req,res){
-    
+    let result = Mushroom.add(req.query.type);
+    res.render('add' , {type: req.query.type , result: result});
 });
 
 // get details via form post,using req body
@@ -47,7 +51,6 @@ app.post('/get', function(req,res){
 });
 
 
-
 // get details via link, uses req.query
 app.get('/get', function(req,res){
     let header='Searching for the medicinal mushroom called ' +req.query.type;
@@ -56,16 +59,6 @@ app.get('/get', function(req,res){
 });
 
 
-
-
-
-
-
-/////////////////////////////////////////////////
-// fungus.find(function(err, mushrooms){
-//     if(err) return console.error(err);
-//     if(mushrooms.length) return;
-// });
 
 // 404 handler
 app.use(function(req,res) {
