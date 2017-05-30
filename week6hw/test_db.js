@@ -1,8 +1,8 @@
 var Mushroom = require("./models/mushroom");
 
-// insert a new item into the database
-//adding new items to db
-new Mushroom({
+    // insert a new item into the database
+    //adding new items to db 
+    new Mushroom({
         type: 'agaricus blazei',
         otherName: 'Prince',
         use: 'anti cancer',
@@ -18,7 +18,7 @@ new Mushroom({
         dosageMg: 300
     }).save();
     
-//ading all items from array to db    
+    //adding all items from array to db    
     new Mushroom({
         type: 'reishi',
         otherName: 'Ganoderma Lucidum',
@@ -67,29 +67,28 @@ new Mushroom({
         dosageMg: 400
     }).save();
 
-
-
-Mushroom.count((err, result)=>{
-     if (err) {
-        console.log(err);
-    } else{
-    console.log(result, "mushrooms in db"); 
-    }
-});
-
-// find all documents 
-Mushroom.find((err, result) => {
-    // output error if one occurred
-    if (err) {
-        console.log(err);
-    } else {
-        // otherwise output the array of documents
-        console.log(result);
-    }
-});
+    Mushroom.count((err, result)=>{
+         if (err) {
+            console.log(err);
+        } else{
+        console.log(result, "mushrooms in db"); 
+        }
+    });
+    
+    // find all documents 
+    Mushroom.find((err, result) => {
+        // output error if one occurred
+        if (err) {
+            console.log(err);
+        } else {
+            // otherwise output the array of documents
+            console.log(result);
+        }
+    });
 
 
 //when running this the first time, the amount items is shown as 0, and the items are shown as empty array.
 //when i stop, and run this code again, what is printed out is the amount in the list, and all the items in the array, 
 //however, this second run duplicates what is in the db. 
-//
+//this is left for the assignment********************************************************************************************************
+//updating your server's 'home', 'get', 'delete' routes to use interface with the database instead of your earlier data array

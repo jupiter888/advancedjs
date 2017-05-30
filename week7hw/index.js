@@ -1,59 +1,105 @@
 'use strict';
-var fungus = require('./models/mushroom.js');
+var Mushroom = require('./models/mushroom.js');
 var express = require("express");
 var app = express();
 
-//express
-app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/public')); // allows direct navigation to static files
-app.use(require("body-parser").urlencoded( {extended: true} ));
 
-//template engine
+
+// configure Express app
+app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/../public'));
+app.use(require("body-parser").urlencoded({extended: true}));
+app.use((err, req, res, next) => {
+  console.log(err);
+});
+
+// set template engine
 let handlebars =  require("express-handlebars");
-app.engine(".html", handlebars({extname: '.html'}));
+app.engine(".html", handlebars({extname: '.html', defaultLayout: 'main' }));
 app.set("view engine", ".html");
 
-//adding new items to db
-new fungus({
-        type: 'agaricus blazei',
-        otherName: 'Prince',
-        use: 'anti cancer',
-        frequency: 'daily',
-        dosageMg: '500'
-    }).save();
-    
-    new fungus({
-        type: 'cordycep militaris',
-        otherName: 'korean cordycep',
-        use: 'anti cancer, stamina',
-        frequency: 'daily',
-        dosageMg: '300'
-    }).save();
+//first word of res render in curlies, is the html, and the err, [WORD]
+app.get('/', (req,res) => {
+    Mushroom.find((err,fungi) => {
+        if (err) return (err);
+        res.render('home', {mushrooms: fungi });    
+    });
+});
 
-
-//send static file as response
-app.get('/', function(req,res){
+app.get('/about', (req,res) => {
     res.type('text/html');
-    res.render('home',{items: fungus.getAll() });
- //this is the constant link to home, we now want this to be dynamic
- //able to change when item is added
-//    res.sendFile(__dirname + '/public/home.html'); 
+    res.render('about');
 });
 
-//search
-fungus.find(function(err, mushrooms){
-    if(err) return console.error(err);
-    if(mushrooms.length) return;
+app.get('/get', (req,res,next) => {
+    Mushroom.findOne({ title:req.query.title }, (err, fungi) => {
+        if (err) return next(err);
+        res.type('text/html');
+        res.render('details', {result: fungi} ); 
+    });
 });
 
+app.post('/get', (req,res, next) => {
+    Mushroom.findOne({ type:req.body.type }, (err, fungi) => {
+        if (err) return next(err);
+        res.type('text/html');
+        res.render('details', {result: fungi} ); 
+    });
+});
 
+app.get('/delete', (req,res) => {
+    Mushroom.remove({ type:req.query.type }, (err, result) => {
+        if (err) return (err);
+        let deleted = result.result.n !== 0; //n will be 0 if no docs deleted
+        Mushroom.count((err, total) => {
+            res.type('text/html');
+            res.render('delete', {type: req.query.type, deleted: deleted , total: total } );    
+        });
+    });
+});
+
+// api's
+app.get('/api/mushroom/:type', (req, res) => {
+    let type = req.params.type;
+    console.log(type);
+    Mushroom.findOne({type: type}, (err, result) => {
+        if (err || !result) return (err);
+        res.json( result );    
+    });
+});
+
+app.get('/api/mushroom', (req,res, next) => {
+    Mushroom.find((err,results) => {
+        if (err || !results) return next(err);
+        res.json(results);
+    });
+});
+
+app.get('/api/delete/:type', (req,res) => {
+    Mushroom.remove({"type":req.params.type }, (err, result) => {
+        if (err) return (err);
+        // return # of items deleted
+        res.json({"deleted": result.result.n});
+    });
+});
+
+app.get('/api/add/:type/:otherName/:use', (req,res, next) => {
+    // find & update existing item, or add new 
+    let type = req.params.type;
+    Mushroom.update({ type: type}, {type:type, otherName: req.params.otherName, use: req.params.use }, {upsert: true }, (err, result) => {
+        if (err) return next(err);
+        // nModified = 0 for new item, = 1+ for updated item 
+        res.json({updated: result.nModified});
+    });
+});
 
 // 404 handler
-app.use(function(req,res) {
+app.use((req,res) => {
     res.type('text/html'); 
-    res.status(404);
-    res.sendFile(__dirname + '/public/404.html'); 
+    res.status(404) ;
+    res.sendFile(__dirname + '/public/404.html');
 });
+     
 app.listen(app.get('port'), function() {
     console.log('Express started');    
 });

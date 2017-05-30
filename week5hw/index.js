@@ -33,7 +33,6 @@ app.get('/delete', function(req,res){
     let result = mushroom.delete(req.query.type);
     res.render('delete' , {type: req.query.type , result: result});
 });
-
 // get details via form post,using req body
 app.post('/get', function(req,res){
     let header='Searching for the medicinal mushroom called ' +req.body.type;

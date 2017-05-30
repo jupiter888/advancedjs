@@ -9,7 +9,7 @@ new Mushroom({
         frequency: 'daily',
         dosageMg: 500
     }).save((err) => {
-        console.log(err)
+        console.log(err);
     });
     
     new Mushroom({

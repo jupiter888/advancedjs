@@ -1,5 +1,5 @@
 'use strict';
-var fungus = require('./models/mushroom.js');
+var Mushroom = require('./models/mushroom.js');
 var express = require("express");
 var app = express();
 
@@ -13,38 +13,59 @@ let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html'}));
 app.set("view engine", ".html");
 
-//adding new items to db
-new fungus({
-        type: 'agaricus blazei',
-        otherName: 'Prince',
-        use: 'anti cancer',
-        frequency: 'daily',
-        dosageMg: '500'
-    }).save();
-    
-    new fungus({
-        type: 'cordycep militaris',
-        otherName: 'korean cordycep',
-        use: 'anti cancer, stamina',
-        frequency: 'daily',
-        dosageMg: '300'
-    }).save();
-
-
-//send static file as response
+//send static file as response with dynamic data
 app.get('/', function(req,res){
     res.type('text/html');
-    res.render('home',{items: fungus.getAll() });
- //this is the constant link to home, we now want this to be dynamic
- //able to change when item is added
-//    res.sendFile(__dirname + '/public/home.html'); 
+    res.render('home',{items: Mushroom.getAll() });
 });
 
-//search
-fungus.find(function(err, mushrooms){
-    if(err) return console.error(err);
-    if(mushrooms.length) return;
+//need delete route
+//need add route
+//search(get all in collection)
+
+/////////////////////////////////////////////////
+// handle /delete
+app.get('/delete', function(req,res){
+    let result = Mushroom.delete(req.query.type);
+    res.render('delete' , {type: req.query.type , result: result});
 });
+
+//handle /add
+app.post('/add', function(req,res){ 
+    
+});
+
+app.get('/add',function(req,res){
+    
+});
+
+// get details via form post,using req body
+app.post('/get', function(req,res){
+    let header='Searching for the medicinal mushroom called ' +req.body.type;
+    let found= Mushroom.get(req.body.type);
+    res.render("details", {type: req.body.type, result: found} );
+});
+
+
+
+// get details via link, uses req.query
+app.get('/get', function(req,res){
+    let header='Searching for the medicinal mushroom called ' +req.query.type;
+    let found= Mushroom.get(req.query.type);
+    res.render("details", {type: req.query.type, result: found} );
+});
+
+
+
+
+
+
+
+/////////////////////////////////////////////////
+// fungus.find(function(err, mushrooms){
+//     if(err) return console.error(err);
+//     if(mushrooms.length) return;
+// });
 
 // 404 handler
 app.use(function(req,res) {
