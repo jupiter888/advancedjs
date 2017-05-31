@@ -13,16 +13,15 @@ let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html'}));
 app.set("view engine", ".html");
 
-//send static file as response with dynamic data
-app.get('/', function(req,res){
-    res.type('text/html');
-    res.render('home',{items: Mushroom.getAll() });
-});
-
-
-//need add route, get and post
 //search(get all in collection)
-
+app.get('/', function(req,res){
+    Mushroom.find(function(err, mushrooms) {
+    if(err) return console.error(err);
+    res.type('text/html');
+    res.render('home',{items: mushrooms });
+    });
+});
+//need add route, get and post
 
 
 //handle /delete
@@ -30,6 +29,7 @@ app.get('/delete', function(req,res){
     let result = Mushroom.delete(req.query.type);
     res.render('delete' , {type: req.query.type , result: result});
 });
+
 
 //handle /add
 app.post('/add', function(req,res){
@@ -71,3 +71,5 @@ app.use(function(req,res) {
 app.listen(app.get('port'), function() {
     console.log('Express started');    
 });
+
+
