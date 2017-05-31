@@ -32,8 +32,8 @@ app.get('/about', (req,res) => {
 });
 
 app.get('/get', (req,res,next) => {
-    Mushroom.findOne({ title:req.query.title }, (err, fungi) => {
-        if (err) return next(err);
+    Mushroom.findOne({ type:req.query.type }, (err, fungi) => {
+        if (err) return (err);
         res.type('text/html');
         res.render('details', {result: fungi} ); 
     });
@@ -41,7 +41,7 @@ app.get('/get', (req,res,next) => {
 
 app.post('/get', (req,res, next) => {
     Mushroom.findOne({ type:req.body.type }, (err, fungi) => {
-        if (err) return next(err);
+        if (err) return (err);
         res.type('text/html');
         res.render('details', {result: fungi} ); 
     });
@@ -52,6 +52,7 @@ app.get('/delete', (req,res) => {
         if (err) return (err);
         let deleted = result.result.n !== 0; //n will be 0 if no docs deleted
         Mushroom.count((err, total) => {
+            if (err) return (err);
             res.type('text/html');
             res.render('delete', {type: req.query.type, deleted: deleted , total: total } );    
         });
