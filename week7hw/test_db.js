@@ -21,7 +21,10 @@ new Mushroom({
     }).save();
 
 Mushroom.count((err, result)=>{
+    if(err){console.log(err)}
+    else{
     console.log(result);
+    }
 });
 
 // find all documents 
