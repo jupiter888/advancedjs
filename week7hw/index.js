@@ -85,7 +85,7 @@ app.get('/api/delete/:type', (req,res) => {
 });
 
 app.get('/api/add/:type/:otherName/:use', (req,res, next) => {
-    // find & update existing item, or add new 
+    //find & update existing item, or add new 
     let type = req.params.type;
     Mushroom.update({ type: type}, {type:type, otherName: req.params.otherName, use: req.params.use }, {upsert: true }, (err, result) => {
         if (err) return next(err);
@@ -93,6 +93,7 @@ app.get('/api/add/:type/:otherName/:use', (req,res, next) => {
         res.json({updated: result.nModified});
     });
 });
+
 
 // 404 handler
 app.use((req,res) => {
