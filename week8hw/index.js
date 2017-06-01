@@ -22,7 +22,7 @@ app.set("view engine", ".html");
 app.get('/', (req,res) => {
     Mushroom.find((err,fungi) => {
         if (err) return (err);
-        res.render('home', {mushrooms: fungi });    
+        res.render('home', {mushrooms: JSON.stringify(fungi) });    //json on this line /////////////////////////////////// 
     });
 });
 
@@ -64,10 +64,7 @@ app.get('/api/mushroom/:type', (req, res) => {
     let type = req.params.type;
     console.log(type);
     Mushroom.findOne({type: type}, (err, result) => {
-        if (err) return (err);
-        if (!result) {
-            res.json([])
-        }
+        if (err || !result) return (err);
         res.json( result );    
     });
 });

@@ -18,7 +18,7 @@ frequency: String,
 dosageMg: Number,
 });
 
-module.exports= mongoose.model('Mushroom',mushroomSchema);
+module.exports= mongoose.model('fungus',mushroomSchema);
 
 
 
