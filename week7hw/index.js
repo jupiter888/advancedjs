@@ -26,6 +26,7 @@ app.get('/', (req,res) => {
     });
 });
 
+
 app.get('/about', (req,res) => {
     res.type('text/html');
     res.render('about');
@@ -60,6 +61,7 @@ app.get('/delete', (req,res) => {
 });
 
 // api's
+
 app.get('/api/mushroom/:type', (req, res) => {
     let type = req.params.type;
     console.log(type);
@@ -72,9 +74,19 @@ app.get('/api/mushroom/:type', (req, res) => {
     });
 });
 
+
+
+//////////////////////////////
+//add posts here
+/////////////////////////////
+
+
+
+
+
 app.get('/api/mushroom', (req,res, next) => {
     Mushroom.find((err,results) => {
-        if (err || !results) return next(err);
+        if (err || !results) return (err);
         res.json(results);
     });
 });
@@ -96,7 +108,6 @@ app.get('/api/add/:type/:otherName/:use', (req,res, next) => {
         res.json({updated: result.nModified});
     });
 });
-
 
 // 404 handler
 app.use((req,res) => {
