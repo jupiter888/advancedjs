@@ -36,11 +36,20 @@ app.post('/get', function(req,res){
     res.render("details", {type: req.body.type, result: found} );
 });
 
+
+//add
 app.post('/add',function(req,res){
     let completeMushroom={type : req.body.type, otherName: req.body.otherName, use: req.body.use, frequency: req.body.frequency, dosageMg:req.body.dosageMg};
     let added= mushroom.add(completeMushroom);
     res.render('add', {type: req.body.type, result:added});
+//     	if (added){
+// 		req.session = {'success': true, 'msg': 'successfully added ' + req.body.type + ' to our records.'};
+// 	} else {
+// 		req.session = {'success': false, 'msg': 'Error: unable to add ' + req.body.type + 'to our records. Check to make sure it has not already been added.'};
+// 	}
 });
+
+
 
 // 404 handler
 app.use(function(req,res) {
@@ -49,11 +58,7 @@ app.use(function(req,res) {
     res.sendFile(__dirname + '/public/404.html'); 
 });
 
-// 	if (success){
-// 		req.session.feedback = {'success': true, 'msg': 'successfully added ' + mushtype + ' to our records.'};
-// 	} else {
-// 		req.session.feedback = {'success': false, 'msg': 'Error: unable to add ' + mushtype + 'to our records. Check to make sure it has not already been added.'};
-// 	}
+
 
 app.listen(app.get('port'), function() {
     console.log('Express started');    

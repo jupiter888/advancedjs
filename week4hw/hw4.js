@@ -1,7 +1,7 @@
 // eslint practice file
-names = ['sara','joe','dave','ann']
+
+var names = ["chaga", "reishi","lions mane","turkey tail"];
 var newArray = names.map( function(item) {
  return item.toUpperCase();
- x = 2;
-}) 
-// console.log(newArray);
+}); 
+console.log(newArray);
