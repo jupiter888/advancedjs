@@ -40,14 +40,14 @@ app.get('/delete', function(req,res){
 
 // get details via form post,using req body
 app.post('/get', function(req,res){
-    let header='Searching for the medicinal mushroom called ' +req.body.type;
+    //let header='Searching for the medicinal mushroom called ' +req.body.type;
     let found= mushroom.get(req.body.type);
     res.render("details", {type: req.body.type, result: found} );
 });
 
 // get details via link, uses req.query
 app.get('/get', function(req,res){
-    let header='Searching for the medicinal mushroom called ' +req.query.type;
+    //let header='Searching for the medicinal mushroom called ' +req.query.type;
     let found= mushroom.get(req.query.type);
     res.render("details", {type: req.query.type, result: found} );
 });

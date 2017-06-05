@@ -3,14 +3,15 @@
 <head>
     <title>Fungal Life insurance</title>
 </head>
-<body>
-    <hr>
-    {{{body}}}
-    <hr>
-    <div class="nav">
-    {{! only show home link if on detail page }}
-    {{#if mushrooms}}{{else}}<a href="/">Home</a> |{{/if}}
+    <body>
+        <hr>
+        {{{body}}}
+        <hr>
+        <div class="nav">
+        {{! only show home link if on detail page }}
+        {{#if mushrooms}}{{else}}
+        {{/if}}
     
-    <footer>&copy; Fungal Life Insurance <a href="/about">About</a> </footer
-</body>
+    <footer>&copy; Fungal Life Insurance | <a href="/">Home</a> | <a href="/about">About</a> </footer
+    </body>
 </html>
