@@ -8,8 +8,13 @@ app.use(express.static(__dirname + '/public')); // allows direct navigation to s
 app.use(require("body-parser").urlencoded( {extended: true} ));
 
 let handlebars =  require("express-handlebars");
-app.engine(".html", handlebars({extname: '.html'}));
+app.engine(".html", handlebars({extname: '.html', defaultLayout: 'main' }));
 app.set("view engine", ".html");
+
+
+
+
+
 
 //send static file as response
 app.get('/', function(req,res){
@@ -19,7 +24,6 @@ app.get('/', function(req,res){
  //able to change when item is added
 //    res.sendFile(__dirname + '/public/home.html'); 
 });
-
 
 
 //About page response
