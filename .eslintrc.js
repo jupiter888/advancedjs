@@ -17,7 +17,7 @@ module.exports = {
 };
 
 
-//You can run ESLint against JS files like so:
+//This is how to run ESLint against JS files:
 
 // $ eslint somefile.js
 // $ eslint lib/**
