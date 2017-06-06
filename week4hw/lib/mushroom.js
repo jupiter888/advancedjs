@@ -26,15 +26,7 @@ exports.delete=(type)=>{
     return {deleted:oldLength !== mushrooms.length ,  total: mushrooms.length };
  };
 
-//add and check new list length to measure success, else return false 
-// exports.add=(newType, newOtherName, newUse, newFrequency, newDosageMg)=>{
-//     var newMushroom={type:newType.toLowerCase(), otherName:newOtherName, use:newUse, frequency:newFrequency, dosageMg:parseInt(newDosageMg) };
-//     {added: mushrooms.push(newMushroom)}
-//     return newMushroom.type + " has been added to the mushroom medicine list" +"<br>"+ mushrooms.length + " mushrooms in catalogue now";
-// };
-
-
-//hw4needs this below
+//add function
 exports.add = (newMushroom) => {
     var oldLength= mushrooms.length;
     if (!this.get(newMushroom.type)) { // if get() returns undefined, add new mushroom
@@ -43,38 +35,3 @@ exports.add = (newMushroom) => {
 
     return {added: oldLength !== mushrooms.length ,  total: mushrooms.length };
 };
-
-	
-
-
-
-// 	if (!alreadyExists) {
-//         mushrooms.push(completeMushroom);
-//         return {added: !alreadyExists ,  total: mushrooms.length };
-// 	}else{
-//     return item.type == type;
-// 	}    
-// };
-
-// 	//check to make sure mushroom isn't on the list already
-// 	var alreadyExists = mushrooms.find(function(item){
-		
-// 	});
-
-
-
-
-
-
-
-
-
-
-// 	//add and check new list length to measure success, else return false 
-// 	if (!alreadyExists){
-// 	var newLength = mushrooms.push(newMush);
-// 		return newLength > oldLength;
-// 	} else { //Mushroom has already been added.
-// 		return false;
-// 	    }
-// 	};

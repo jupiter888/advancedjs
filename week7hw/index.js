@@ -60,8 +60,8 @@ app.get('/delete', (req,res) => {
     });
 });
 
-// api's
-
+////////////////////////////////////////// api's
+//retrieve item and print json
 app.get('/api/mushroom/:type', (req, res) => {
     let type = req.params.type;
     console.log(type);
