@@ -68,7 +68,7 @@ app.get('/api/mushroom/:type', (req, res) => {
     Mushroom.findOne({type: type}, (err, result) => {
         if (err) return (err);
         if (!result) {
-            res.json([])
+            res.json([]);
         }
         res.json( result );    
     });

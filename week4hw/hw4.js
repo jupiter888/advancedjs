@@ -5,3 +5,4 @@ var newArray = names.map( function(item) {
  return item.toUpperCase();
 }); 
 console.log(newArray);
+
