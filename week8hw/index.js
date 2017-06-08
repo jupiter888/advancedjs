@@ -21,9 +21,9 @@ app.set("view engine", ".html");
 
 //first word of res render in curlies, is the html, and the err, [WORD]
 app.get('/', (req,res) => {
-    mushroom.find((err,fungi) => {
+    mushroom.find((err,results) => {
         if (err) return (err);
-        res.render('home', {mushroom: mushroom });    
+        res.render('home', {mushrooms: JSON.stringify(results) });    
     });
 });
 
@@ -75,7 +75,7 @@ app.get('/api/mushroom/:type', (req, res) => {
     });
 });
 
-
+//added trail / behind mushroom below. june 7 18:21*
 app.get('/api/mushroom', (req,res, next) => {
     mushroom.find((err,results) => {
         if (err || !results) return (err);
@@ -83,7 +83,9 @@ app.get('/api/mushroom', (req,res, next) => {
     });
 });
 
-app.get('/api/delete/:type', (req,res) => {
+
+//delete
+app.get('/api/mushroom/delete/:type', (req,res) => {
     mushroom.remove({"type":req.params.type }, (err, result) => {
         if (err) return (err);
         // return # of items deleted
@@ -91,7 +93,8 @@ app.get('/api/delete/:type', (req,res) => {
     });
 });
 
-app.get('/api/add/:type/:otherName/:use', (req,res, next) => {
+//finds, edits, or adds
+app.get('/api/mushroom/add/:type/:otherName/:use', (req,res, next) => {
     //find & update existing item, or add new 
     let type = req.params.type;
     mushroom.update({ type: type}, {type:type, otherName: req.params.otherName, use: req.params.use }, {upsert: true }, (err, result) => {
