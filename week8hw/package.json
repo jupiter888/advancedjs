@@ -1,0 +1,25 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jupiter888/advancedjs/tree/master/week8hw"
+  },
+  "keywords": [
+    "React"
+    "Javascript"
+  ],
+  "author": "Daniel Tracy",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "handlebars": "^4.0.6",
+    "mongoose": "^4.9.8"
+  },
+}
