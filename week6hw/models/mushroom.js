@@ -16,22 +16,6 @@ var mushroomSchema=mongoose.Schema({
     frequency: String,
     dosageMg: Number
 });
-
-//creating dynamic methods 
-//mongo remove method (delete)
-mushroomSchema.methods.delete=function(mushroom_type){
-    return this.model('Mushroom').remove({type: mushroom_type});
-};
-
-//mongo create method (add)
-mushroomSchema.methods.create=function(mtype,motherName, muse, mfrequency, mdosageMg){ 
-    return this.model('Mushroom').insert({type:mtype, otherName:motherName, use:muse, freuquency:mfrequency, dosageMg:mdosageMg});  
-};
-
-//mongo find method (get)
-mushroomSchema.methods.get=function(mushroom_type){
-    return this.model('Mushroom').findOne({type:mushroom_type});
-};
 module.exports= mongoose.model('Mushroom', mushroomSchema);
 
 

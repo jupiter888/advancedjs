@@ -16,49 +16,48 @@ app.set("view engine", ".html");
 //search(get all in collection)
 app.get('/', function(req,res){
     Mushroom.find(function(err, mushrooms) {
-    if(err) return console.error(err);
-    res.type('text/html');
-    res.render('home',{items: mushrooms });
+    if(err) return(err);
+    res.render('home',{mushrooms: mushrooms });
     });
 });
-//need add route, get and post
 
 
-//handle /delete
+
+//delete
 app.get('/delete', function(req,res){
     let result = Mushroom.delete(req.query.type);
     res.render('delete' , {type: req.query.type , result: result});
 });
 
 
-//handle /add
-app.post('/add', function(req,res){
-    let completeMushroom={type : req.body.type, otherName: req.body.otherName, use: req.body.use, frequency: req.body.frequency, dosageMg:req.body.dosageMg};
-     let added= Mushroom.add(completeMushroom);
-    res.render('add', {type: req.body.type, result:added});
+//add
+// app.post('/add', function(req,res){
+//     let completeMushroom={type : req.body.type, otherName: req.body.otherName, use: req.body.use, frequency: req.body.frequency, dosageMg:req.body.dosageMg};
+//      let added= Mushroom.add(completeMushroom);
+//     res.render('add', {type: req.body.type, result:added});
+// });
+
+//add
+// app.get('/add',function(req,res){
+//     let result = Mushroom.add(req.query.type);
+//     res.render('add' , {type: req.query.type , result: result});
+// });
+
+app.get('/get', (req,res)=>{
+    Mushroom.findOne({type: req.body.type},(err, mushroom)=>{
+        if(err) return(err);
+        res.type('text/html');
+        res.render('details',{result:mushroom});
+    });
 });
 
-app.get('/add',function(req,res){
-    let result = Mushroom.add(req.query.type);
-    res.render('add' , {type: req.query.type , result: result});
+app.post('/get', (req,res) =>{
+    Mushroom.findOne({type: req.body.type},(err, mushroom)=>{
+        if(err) return(err);
+        res.type('text/html');
+        res.render('details',{result:mushroom} );
+    });
 });
-
-// get details via form post,using req body
-app.post('/get', function(req,res){
-    let header='Searching for the medicinal mushroom called ' +req.body.type;
-    let found= Mushroom.get(req.body.type);
-    res.render("details", {type: req.body.type, result: found} );
-});
-
-
-// get details via link, uses req.query
-app.get('/get', function(req,res){
-    let header='Searching for the medicinal mushroom called ' +req.query.type;
-    let found= Mushroom.get(req.query.type);
-    res.render("details", {type: req.query.type, result: found} );
-});
-
-
 
 // 404 handler
 app.use(function(req,res) {
@@ -71,5 +70,4 @@ app.use(function(req,res) {
 app.listen(app.get('port'), function() {
     console.log('Express started');    
 });
-
 
