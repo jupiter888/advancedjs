@@ -8,9 +8,9 @@
     <li><em>Common Uses: </em> {{result.use}}</li>
     <li><em>Dosage Frequency: </em> {{result.frequency}}</li>
     <li><em>Dosage Amount (Mg): </em> {{result.dosageMg}}</li>
-    <p>
-    <a href="/delete?type={{type}}">Delete</a>
-    </p>
+    <div>
+    <a href="/delete?type={{result.type}}">Delete</a>
+    </div>
    <!--this is the comment in a template that will not show up-->
 {{else}}
         <h2>{{type}} cannot be found</h2>

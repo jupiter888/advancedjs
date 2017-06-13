@@ -16,6 +16,8 @@ var mushroomSchema=mongoose.Schema({
     frequency: String,
     dosageMg: Number
 });
+
+
 module.exports= mongoose.model('Mushroom', mushroomSchema);
 
 
