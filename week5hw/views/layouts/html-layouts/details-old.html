@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <a href="/">Home</a>
+{{#if result}}
+    <h2>Searching for {{type}} details</h2>
+    <li><em>Type: </em> {{result.type}}</li>
+    <li><em>Latin Name: </em> {{result.otherName}}</li>
+    <li><em>Common Uses: </em> {{result.use}}</li>
+    <li><em>Dosage Frequency: </em> {{result.frequency}}</li>
+    <li><em>Dosage Amount (Mg): </em> {{result.dosageMg}}</li>
+    <p>
+    <a href="/delete?type={{type}}">Delete</a>
+  
+   <!--this is the comment in a template that will not show up-->
+{{else}}
+        <h2>{{type}} cannot be found</h2>
+{{/if}}
+    </body>
+</html>

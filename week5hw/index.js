@@ -7,14 +7,19 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public')); // allows direct navigation to static files
 app.use(require("body-parser").urlencoded( {extended: true} ));
 
-let handlebars =  require("express-handlebars");
-app.engine(".html", handlebars({extname: '.html', defaultLayout: 'main' }));
-app.set("view engine", ".html");
+var viewsPath = __dirname + '/views';
 
+var handlebars =  require("express-handlebars").create({
+    defaultLayout: 'main',
+    extname: '.hbs', layoutsDir: viewsPath + '/layouts',  
+    partialsDir: viewsPath + '/partials' });
+    
+app.engine(".hbs", handlebars.engine);
+app.set('views', viewsPath );
+//({extname: '.hbs', defaultLayout: 'main' , layoutsDir: viewsPath + '/layouts' }));
+app.set('view engine','.hbs');
 
-
-
-
+////////////////////////
 
 //send static file as response
 app.get('/', function(req,res){
