@@ -33,35 +33,10 @@ app.get('/about', (req,res) => {
     res.render('about');
 });
 
-// app.get('/get', (req,res,next) => {
-//     mushroom.findOne({ type:req.query.type }, (err, mushroom) => {
-//         if (err) return (err);
-//         res.type('text/html');
-//         res.render('details', {result: mushroom} ); 
-//     });
-// });
 
-// app.post('/get', (req,res, next) => {
-//     mushroom.findOne({ type:req.body.type }, (err, mushroom) => {
-//         if (err) return (err);
-//         res.type('text/html');
-//         res.render('details', {result:mushroom} ); 
-//     });
-// });
-
-// app.get('/api/mushroom/delete/:id', (req,res, next) => {
-//     mushroom.remove({"_id":req.params.id }, (err, result) => {
-//         if (err) return (err);
-//         let deleted = result.result.n !== 0; //n will be 0 if no docs deleted
-//         mushroom.count((err, total) => {
-//             if (err) return (err);
-//             res.type('text/html');
-//             res.render('delete', {type: req.query.type, deleted: deleted , total: total } );    
-//         });
-//     });
-// });
 
 ////////////////////////////////////////// api's
+
 //retrieve item and print json
 app.get('/api/mushroom/:type', (req, res) => {
     let type = req.params.type;

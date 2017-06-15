@@ -28,6 +28,7 @@ app.get('/delete', (req,res)=>{
     Mushroom.remove({ type:req.query.type }, (err, result) => {
         if (err) return(err);
         Mushroom.find(function(err, mushrooms) {
+             if(err) return(err);
             var total = mushrooms.length;
             res.render('delete' , {type: req.query.type , deleted: true, total: total});
         });
