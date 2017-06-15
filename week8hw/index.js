@@ -82,25 +82,6 @@ app.post('/api/add/', (req,res, next) => {
     }
 });
 
-//;line70
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //finds, edits, or adds
 app.get('/api/mushroom/add/:type/:otherName/:use', (req,res, next) => {
